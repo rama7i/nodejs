@@ -1,0 +1,11 @@
+Common = {
+  express : require('express'),
+  router : express.Router(),
+  passport = require('passport'),
+  FacebookStrategy = require('passport-facebook').Strategy,
+  AWS = require('aws-sdk'),
+  colors = require('colors')
+  
+};
+
+module.exports = Common;

@@ -1,15 +1,14 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-
+global.func = require('./functions/globals.js');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var query = require('./routes/query');
+var facebook = require('./routes/facebook');
 
-var app = express();
+
+AWS.config = new AWS.Config();
+AWS.config.accessKeyId = "AKIAIN3F4XXTDXEFTQ2Q";
+AWS.config.secretAccessKey = "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";
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -26,10 +25,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/query', query);
+app.use('/facebook', facebook);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+  global.err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
